@@ -1,0 +1,207 @@
+.login {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.login__sidebar {
+  min-width: 385px;
+  max-width: 385px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: white;
+  transition: all 0.6s cubic-bezier(0.945, 0.02, 0.27, 0.665);
+  transform-origin: bottom left;
+}
+
+.login__component {
+  margin: 50px 0 50px 42px;
+  .login__header {
+    margin-top: 32px;
+    margin-bottom: 24px;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .google__btn {
+    display: flex;
+    flex-direction: row;
+    width: 296px;
+    padding: 0px 2px 0px 0px;
+    border: 1px solid rgb(66, 133, 244);
+    border-radius: 2px;
+    box-sizing: content-box;
+    background-color: rgb(66, 133, 244);
+    cursor: pointer;
+    .google__logo {
+      padding: 15px;
+      background-color: #fff;
+      line-height: 0;
+      width: 48px;
+      height: 48px;
+      display: inline-block;
+      border-radius: 4px 0 0 4px;
+    }
+    .btn__txt-wrap {
+      flex-grow: 1;
+      height: 48px;
+      .btn__txt {
+        color: $white;
+        font-size: 14px;
+        font-weight: bold;
+        height: 48px;
+        line-height: 48px;
+      }
+    }
+  }
+  .login__divider {
+    margin: 20px 0;
+    text-align: center;
+    position: relative;
+    width: 298px;
+    span {
+      background: rgb(255, 255, 255);
+      padding: 0px 10px;
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 16px;
+      color: rgb(93, 108, 116);
+      text-align: center;
+    }
+    &::before {
+      display: inline-block;
+      border-top: 1px solid rgb(184, 196, 194);
+      content: "";
+      margin: 0px auto;
+      position: absolute;
+      height: 0px;
+      inset: 50% 0px 0px;
+      z-index: -1;
+      transform: translateY(-50%);
+      width: 300px;
+    }
+  }
+  form {
+    fieldset {
+      border: 0;
+      margin: 0 0 20px;
+      padding: 0;
+      label {
+        display: inline;
+        font-size: 14px;
+        color: rgb(61, 79, 88);
+        position: relative;
+        height: 16px;
+        width: 56px;
+        font-weight: bold;
+        line-height: 16px;
+        letter-spacing: 0.02em;
+        .input__field {
+          display: flex;
+          flex-direction: column;
+          width: 300px;
+          margin-top: 5px;
+          .box {
+            // display: inline-flex;
+            -webkit-box-align: stretch;
+            align-items: stretch;
+            position: relative;
+            z-index: 0;
+            width: 100%;
+            input {
+              display: block;
+              height: 36px;
+              font-size: 14px;
+              line-height: 20px;
+              width: 100%;
+              border-radius: 4px;
+              padding-left: 12px;
+              font-weight: normal;
+              border: 1px solid rgb(184, 196, 194);
+              transition: border-color 150ms ease-in-out 0s;
+              z-index: 1;
+              outline: none;
+              color: rgb(33, 49, 60);
+              background-color: rgb(255, 255, 255);
+              padding-right: 12px;
+            }
+            .error__message {
+              color: #e02121;
+              background-color: #ffb7b5;
+              padding: 10px;
+              font-size: 18px;
+              font-weight: bold;
+              line-height: 20px;
+              letter-spacing: 0.02rem;
+              span {
+                margin-left: 3px;
+              }
+            }
+          }
+        }
+      }
+    }
+    button {
+      color: white;
+      background-color: $primary;
+      border: none;
+      border-radius: 2px;
+      box-shadow: 1px 3px 4px 0px black;
+      padding: 3px 10px;
+      &:disabled {
+        background-color: #f4f5f7;
+        color: #afb4bd;
+        box-shadow: none;
+        padding: 3px 10px;
+      }
+    }
+  }
+  footer {
+    p {
+      margin: 20px 0;
+      font-size: 15px;
+      color: rgb(33, 49, 60);
+    }
+    a {
+      color: rgb(0, 124, 173);
+    }
+  }
+}
+
+.login__bg {
+  width: 100vw;
+  height: 100vh;
+  order: 2;
+  left: 385px;
+}
+
+@media only screen and (max-width: 767px) {
+  .login {
+    flex-direction: column-reverse;
+  }
+  .login__sidebar {
+    min-width: 100%;
+    height: calc(100vh - 60px);
+    order: 1;
+  }
+  .login__bg {
+    width: 100vw;
+    height: 60px;
+    object-fit: cover;
+  }
+  .login__component {
+    margin: 50px 16px;
+    .login__header {
+      font-size: 30px;
+    }
+    .google__btn {
+      width: calc(100vw - 36px);
+    }
+    .login__divider {
+      width: calc(100vw - 32px);
+    }
+    .input__field {
+      width: calc(100vw - 32px) !important;
+    }
+  }
+}

@@ -1,0 +1,57 @@
+.services {
+  overflow: hidden;
+  .card {
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.3);
+    }
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      transform: scale3d(0, 0, 1);
+      transition: transform 0.3s ease-out 0s;
+      background: rgba(255, 255, 255, 0.1);
+      content: "";
+      pointer-events: none;
+    }
+    &::before {
+      transform-origin: left top;
+    }
+    &::after {
+      transform-origin: right bottom;
+    }
+    &:hover::before,
+    &:hover::after,
+    &:focus::before,
+    &:focus::after {
+      transform: scale3d(1, 1, 1);
+    }
+    .card-img-overlay {
+      background-color: rgba(#000, 0.2);
+      .card-title {
+        padding-top: 70%;
+        font-weight: 800;
+      }
+      .card-text {
+        font-size: 0.9rem;
+        font-weight: 300;
+      }
+      .card__btn {
+        border-radius: 20px;
+        box-shadow: 1px 3px 4px 0px black;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .services {
+    .card {
+      margin: 30px;
+    }
+  }
+}
