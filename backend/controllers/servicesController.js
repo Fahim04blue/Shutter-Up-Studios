@@ -22,7 +22,7 @@ const createService = async (req, res) => {
       .status(200)
       .json({ message: 'Service created Successfully', result: newService });
   } catch (error) {
-    console.log(error.message);
+    // console.log(error.message);
     res.status(500).json({ message: error.message });
   }
 };
