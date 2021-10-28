@@ -1,23 +1,30 @@
+/* eslint-disable no-underscore-dangle */
 const Service = require('../models/Services');
+const Category = require('../models/Category');
 const cloudinary = require('../lib/cloudinary');
 
 const createService = async (req, res) => {
   try {
-    const { name, summary, price, desc1, desc2, desc3, desc4 } = req.body;
+    const service = req.body;
     const upload = await cloudinary.uploader.upload(req.file.path);
 
     const newService = new Service({
-      name,
-      summary,
-      price,
-      desc1,
-      desc2,
-      desc3,
-      desc4,
+      ...service,
       image: upload.secure_url,
       cloudinary_id: upload.public_id,
     });
-    await newService.save();
+    const createdService = await newService.save();
+    await Category.updateOne(
+      {
+        _id: service.category,
+      },
+      {
+        $push: {
+          services: createdService._id,
+        },
+      }
+    );
+
     res
       .status(200)
       .json({ message: 'Service created Successfully', result: newService });
@@ -28,8 +35,24 @@ const createService = async (req, res) => {
 };
 
 const getService = async (req, res) => {
+  let query;
+  const reqQuery = { ...req.query };
+
+  const queryStr = JSON.stringify(reqQuery);
+  // console.log({ before: queryStr });
+  query = Service.find(JSON.parse(queryStr));
+
+  // console.log({ after: query });
+
+  if (req.query.sort) {
+    const sortByArr = req.query.sort.split(',').join(' ');
+    query = query.sort(sortByArr);
+  } else {
+    query = query.sort('-createdAt');
+  }
+
   try {
-    const service = await Service.find();
+    const service = await query.populate('category', 'name -_id');
     res.status(200).json({
       message: 'All Services',
       result: service,
