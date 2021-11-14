@@ -11,18 +11,12 @@ const serviceSchema = new mongoose.Schema(
     price: {
       type: Number,
     },
-    desc1: {
-      type: String,
-    },
-    desc2: {
-      type: String,
-    },
-    desc3: {
-      type: String,
-    },
-    desc4: {
-      type: String,
-    },
+    description: [
+      {
+        name: { type: String },
+      },
+    ],
+
     category: {
       type: mongoose.Types.ObjectId,
       ref: 'Category',

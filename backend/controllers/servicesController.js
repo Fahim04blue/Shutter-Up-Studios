@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
 const Service = require('../models/Services');
 const Category = require('../models/Category');
@@ -38,21 +39,30 @@ const getService = async (req, res) => {
   let query;
   const reqQuery = { ...req.query };
 
-  const queryStr = JSON.stringify(reqQuery);
   // console.log({ before: queryStr });
-  query = Service.find(JSON.parse(queryStr));
+  query = Service.find(reqQuery);
 
-  // console.log({ after: query });
+  console.log({ after: req.query });
 
   if (req.query.sort) {
     const sortByArr = req.query.sort.split(',').join(' ');
     query = query.sort(sortByArr);
   } else {
-    query = query.sort('-createdAt');
+    query = Service.find({ category: '617af46432aaf72197f2f033' }).sort(
+      '-price'
+    );
+  }
+
+  if (req.query.limit) {
+    query = query
+      .select({
+        description: 0,
+      })
+      .limit(4);
   }
 
   try {
-    const service = await query.populate('category', 'name -_id');
+    const service = await query.populate('category', 'name _id');
     res.status(200).json({
       message: 'All Services',
       result: service,
@@ -74,29 +84,13 @@ const getServiceById = async (req, res) => {
   }
 };
 
-const getLimitedService = async (req, res) => {
-  try {
-    const service = await Service.find()
-      .select({
-        desc1: 0,
-        desc2: 0,
-        desc3: 0,
-        desc4: 0,
-      })
-      .limit(4)
-      .exec();
-    res.status(200).json({
-      message: 'Landing Page Services',
-      result: service,
-    });
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
-
 const deleteService = async (req, res) => {
   try {
     const service = await Service.findByIdAndDelete({ _id: req.params.id });
+    await Category.updateOne(
+      { _id: service.category },
+      { $pull: { services: req.params.id } }
+    );
     await cloudinary.uploader.destroy(service.cloudinary_id);
     res.status(200).json({ message: 'Service Deleted Successfully' });
   } catch (error) {
@@ -108,6 +102,5 @@ module.exports = {
   createService,
   getService,
   getServiceById,
-  getLimitedService,
   deleteService,
 };

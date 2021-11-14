@@ -15,7 +15,7 @@
       transform: scale3d(0, 0, 1);
       transition: transform 0.3s ease-out 0s;
       background: rgba(255, 255, 255, 0.1);
-      content: "";
+      content: '';
       pointer-events: none;
     }
     &::before {
@@ -30,6 +30,9 @@
     &:focus::after {
       transform: scale3d(1, 1, 1);
     }
+    .card-img {
+      height: 480px;
+    }
     .card-img-overlay {
       background-color: rgba(#000, 0.2);
       .card-title {
@@ -39,6 +42,10 @@
       .card-text {
         font-size: 0.9rem;
         font-weight: 300;
+      }
+      .card-text-price {
+        font-size: 1.3rem;
+        font-weight: 800;
       }
       .card__btn {
         border-radius: 20px;

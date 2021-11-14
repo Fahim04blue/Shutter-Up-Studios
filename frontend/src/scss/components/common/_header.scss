@@ -1,6 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap');
 
 .header.dashboard {
+  .navbar {
+    background-color: $primary !important;
+  }
+}
+.header.services {
   .navbar {
     background-color: $primary !important;
   }
@@ -19,7 +24,7 @@
 }
 
 .navbar-brand {
-  font-family: "Mr De Haviland", cursive;
+  font-family: 'Mr De Haviland', cursive;
   font-weight: bold;
   font-size: 2.5rem;
 }
