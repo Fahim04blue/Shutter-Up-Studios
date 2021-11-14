@@ -19,16 +19,10 @@ const getCategory = async (req, res) => {
   let query;
   const reqQuery = { ...req.query };
 
-  console.log(req.query);
   if (req.query.name) {
     query = Category.find(reqQuery);
   } else {
     query = Category.find();
-  }
-
-  if (req.query.sort) {
-    const sortByArr = req.query.sort.split(',').join(' ');
-    query = query.sort(sortByArr);
   }
 
   try {
