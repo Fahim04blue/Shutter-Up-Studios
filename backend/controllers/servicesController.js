@@ -47,10 +47,6 @@ const getService = async (req, res) => {
   if (req.query.sort) {
     const sortByArr = req.query.sort.split(',').join(' ');
     query = query.sort(sortByArr);
-  } else {
-    query = Service.find({ category: '617af46432aaf72197f2f033' }).sort(
-      '-price'
-    );
   }
 
   if (req.query.limit) {
