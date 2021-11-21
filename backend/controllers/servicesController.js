@@ -42,7 +42,7 @@ const getService = async (req, res) => {
   // console.log({ before: queryStr });
   query = Service.find(reqQuery);
 
-  console.log({ after: req.query });
+  // console.log({ after: req.query });
 
   if (req.query.sort) {
     const sortByArr = req.query.sort.split(',').join(' ');
@@ -55,6 +55,10 @@ const getService = async (req, res) => {
         description: 0,
       })
       .limit(4);
+  }
+
+  if (req.query.category) {
+    query;
   }
 
   try {

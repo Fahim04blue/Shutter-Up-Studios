@@ -3,3 +3,5 @@ const { createAdmin, isAdmin } = require('../controllers/adminController');
 
 router.post('/', createAdmin);
 router.post('/isAdmin', isAdmin);
+
+module.exports = router;

@@ -18,17 +18,23 @@ const createCategory = async (req, res) => {
 const getCategory = async (req, res) => {
   let query;
   const reqQuery = { ...req.query };
+  query = Category.find(reqQuery);
 
   if (req.query.name) {
-    query = Category.find(reqQuery);
+    query;
   } else {
     query = Category.find();
+  }
+
+  if (req.query.sort) {
+    const sortByArr = req.query.sort.split(',').join(' ');
+    query = query.sort(sortByArr);
   }
 
   try {
     const categories = await query.populate('services');
     res.status(200).json({
-      message: 'All Category',
+      message: 'Category Data',
       result: categories,
     });
   } catch (error) {
