@@ -6,11 +6,11 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  updateProfile,
+  updateProfile
 } from 'firebase/auth';
 import 'lib/firebase';
 import {
-  createContext, useContext, useEffect, useState,
+  createContext, useContext, useEffect, useState
 } from 'react';
 
 const AuthContext = createContext();

@@ -1,12 +1,13 @@
 import { useAuth } from 'contexts/AuthContext';
-import React, { useRef, useEffect, useState } from 'react';
-
-import { Container, Navbar, Nav } from 'react-bootstrap';
-import { useLocation, NavLink } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const { currentUser, logout } = useAuth();
+  console.log(currentUser);
   const [navBackground, setNavBackground] = useState(false);
+  const history = useHistory();
   const navRef = useRef();
   navRef.current = navBackground;
 
@@ -22,6 +23,10 @@ const Header = () => {
       document.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  const handleLogout = () => {
+    logout();
+    history.push('/');
+  };
 
   const path = useLocation()?.pathname;
   const location = path.split('/')[1];
@@ -52,12 +57,20 @@ const Header = () => {
                 Gallery
               </NavLink>
               {currentUser ? (
-                <>
-                  <a className="nav__text">{currentUser.displayName}</a>
-                  <a onClick={logout} className="nav__text">
+                <NavDropdown
+                  id="nav-dropdown-dark-example"
+                  title={currentUser.displayName}
+                  menuVariant="dark"
+                >
+                  <NavDropdown.Item
+                    onClick={() => history.replace('/dashboard/profile')}
+                  >
+                    Dashboard
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleLogout}>
                     Logout
-                  </a>
-                </>
+                  </NavDropdown.Item>
+                </NavDropdown>
               ) : (
                 <NavLink className="nav__text" to="/account/login">
                   Login

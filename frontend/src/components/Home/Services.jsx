@@ -1,6 +1,7 @@
 import StyledDash from 'components/common/StyledDash';
 import useAsync from 'Hooks/useAsync';
 import { Button, Col, Container, Row } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import ProductService from 'services/ProductService';
 import ServiceSkeleton from 'skeletons/ServiceSkeleton';
 import { prettyPrintNumbers } from 'utils/utils';
@@ -9,6 +10,7 @@ const Services = () => {
   const { data: services, isLoading } = useAsync(
     ProductService.getPopularServices
   );
+  const history = useHistory();
 
   return (
     <div className="services">
@@ -37,7 +39,12 @@ const Services = () => {
                       {prettyPrintNumbers(service?.price)}
                     </p>
                     <div className=" d-flex gap-2">
-                      <Button className="card__btn">View More</Button>
+                      <Button
+                        className="card__btn"
+                        onClick={() => history.push('/services')}
+                      >
+                        View More
+                      </Button>
                       <Button className="card__btn">Book Now</Button>
                     </div>
                   </div>

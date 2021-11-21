@@ -6,7 +6,7 @@ const Dashboard = () => (
   <Container className="mt-4 py-4 py-md-5">
     <div className="wrapper">
       <Row className="pt-4">
-        <Col lg={3}>
+        <Col lg={3} className="profile-navigation mb-3">
           <Sidebar />
         </Col>
         <Col lg={9}>

@@ -16,10 +16,28 @@
 }
 
 .nav__text {
-  color: $light;
+  color: $light !important;
+  cursor: pointer;
   &:hover {
-    color: $white;
+    color: $white !important;
     border-bottom: 3px solid $primary;
+  }
+}
+.nav-link {
+  display: inline;
+  color: $light !important;
+}
+a[aria-expanded='false'] {
+  &:hover {
+    color: $white !important;
+    border-bottom: 3px solid $primary;
+  }
+}
+a[aria-expanded='true'] {
+  background: none !important;
+  border-bottom: none;
+  &:hover {
+    border-bottom: none;
   }
 }
 
