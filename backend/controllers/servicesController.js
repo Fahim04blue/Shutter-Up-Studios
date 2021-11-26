@@ -6,18 +6,23 @@ const cloudinary = require('../lib/cloudinary');
 
 const createService = async (req, res) => {
   try {
-    const service = req.body;
+    const { name, summary, price, description, category } = req.body;
     const upload = await cloudinary.uploader.upload(req.file.path);
 
     const newService = new Service({
-      ...service,
+      name,
+      summary,
+      price,
+      // description: JSON.parse(description),
+      description,
+      category,
       image: upload.secure_url,
       cloudinary_id: upload.public_id,
     });
     const createdService = await newService.save();
     await Category.updateOne(
       {
-        _id: service.category,
+        _id: newService.category,
       },
       {
         $push: {
@@ -84,6 +89,57 @@ const getServiceById = async (req, res) => {
   }
 };
 
+const updateServiceById = async (req, res) => {
+  try {
+    let service = await Service.findById({ _id: req.params.id });
+    await cloudinary.uploader.destroy(service.cloudinary_id);
+
+    let upload;
+    if (req.file) {
+      upload = await cloudinary.uploader.upload(req.file.path);
+    }
+
+    const updatedData = {
+      name: req.body.name || service.name,
+      summary: req.body.summary || service.summary,
+      price: req.body.price || service.price,
+      // description:
+      //   JSON.parse(req.body.description) || JSON.parse(service.description),
+      description: req.body.description || service.description,
+      category: req.body.category || service.category,
+      image: upload.secure_url || service.image,
+      cloudinary_id: upload.public_id || service.cloudinary_id,
+    };
+    // console.log('Previous Category', service.category._id);
+    // console.log('Updated Category', req.body.category);
+    if (service.category._id !== req.body.category) {
+      await Category.updateMany(
+        { _id: service.category },
+        { $pull: { services: req.params.id } }
+      );
+    }
+
+    service = await Service.findByIdAndUpdate(req.params.id, updatedData, {
+      new: true,
+    });
+
+    // console.log('Updated Category', service.category._id);
+    // console.log('Updated Req Category', req.body.category);
+
+    await Category.updateMany(
+      { _id: service.category },
+      { $push: { services: service._id } }
+    );
+
+    res.status(200).json({
+      message: 'Updated Service',
+      result: service,
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const deleteService = async (req, res) => {
   try {
     const service = await Service.findByIdAndDelete({ _id: req.params.id });
@@ -102,5 +158,6 @@ module.exports = {
   createService,
   getService,
   getServiceById,
+  updateServiceById,
   deleteService,
 };
