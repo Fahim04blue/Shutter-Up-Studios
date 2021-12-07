@@ -1,10 +1,9 @@
-import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { AiFillWarning } from 'react-icons/ai';
-import { Link, useHistory } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 import { useState } from 'react';
-
+import { useForm } from 'react-hook-form';
+import { AiFillWarning } from 'react-icons/ai';
+import { Link, useHistory } from 'react-router-dom';
 import GoogleButton from './GoogleButton';
 
 const LoginForm = () => {
@@ -83,11 +82,11 @@ const LoginForm = () => {
                       console.log('messages', messages);
                       return messages
                         ? Object.entries(messages).map(([type, message]) => (
-                          <p className="error__message" key={type}>
-                            <AiFillWarning style={{ marginTop: '-5px' }} />
-                            <span>{message}</span>
-                          </p>
-                        ))
+                            <p className="error__message" key={type}>
+                              <AiFillWarning style={{ marginTop: '-5px' }} />
+                              <span>{message}</span>
+                            </p>
+                          ))
                         : null;
                     }}
                   />
@@ -121,14 +120,11 @@ const LoginForm = () => {
                       console.log('messages', messages);
                       return messages
                         ? Object.entries(messages).map(([type, message]) => (
-                          <p className="error__message" key={type}>
-                            <AiFillWarning style={{ marginTop: '-5px' }} />
-                            <span>
-                              {' '}
-                              {message}
-                            </span>
-                          </p>
-                        ))
+                            <p className="error__message" key={type}>
+                              <AiFillWarning style={{ marginTop: '-5px' }} />
+                              <span> {message}</span>
+                            </p>
+                          ))
                         : null;
                     }}
                   />
@@ -142,10 +138,7 @@ const LoginForm = () => {
         </form>
         <footer>
           <p>
-            Don't have an account?
-            {' '}
-            <Link to="/account/register">Sign up</Link>
-            {' '}
+            Don't have an account? <Link to="/register">Sign up</Link>{' '}
           </p>
         </footer>
       </div>

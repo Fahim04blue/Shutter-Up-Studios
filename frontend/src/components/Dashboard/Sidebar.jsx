@@ -1,5 +1,4 @@
 import { useAuth } from 'contexts/AuthContext';
-import useLocalStorage from 'Hooks/useLocalStorage';
 import React, { useEffect } from 'react';
 import Avatar from 'react-avatar';
 import { Image } from 'react-bootstrap';
@@ -13,19 +12,21 @@ import {
 import { GoChecklist } from 'react-icons/go';
 import { MdRateReview } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
-import AdminService from 'services/AdminService';
+import UserService from 'services/UserService';
 
 const Sidebar = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, isAdmin, setIsAdmin } = useAuth();
   const { routes } = useParams();
 
-  const [isAdmin, setIsAdmin] = useLocalStorage('admin', false);
-
   useEffect(() => {
-    AdminService.verifyAdmin({ email: currentUser?.email }).then((data) => {
-      setIsAdmin(data);
+    UserService.signIn(currentUser?.email).then((data) => {
+      setIsAdmin(data[0].role);
     });
   }, [currentUser?.email]);
+
+  // setIsAdmin(userData[0]?.role);
+
+  // console.log('User Data', userData[0]?.role);
 
   return (
     <div className="navigation-wrapper p-3">
@@ -54,14 +55,14 @@ const Sidebar = () => {
           <span>Profile</span>
         </Link>
 
-        {isAdmin ? (
+        {isAdmin === 'admin' ? (
           <>
             <Link
-              to="/dashboard/orderList"
-              className={routes === 'orderList' ? 'nav-link active' : ''}
+              to="/dashboard/allBookings"
+              className={routes === 'allBookings' ? 'nav-link active' : ''}
             >
               <FaListUl className="icon" />
-              <span>Order List</span>
+              <span>All Bookings</span>
             </Link>
 
             <Link
@@ -71,6 +72,13 @@ const Sidebar = () => {
               <FaFileMedical className="icon" />
               <span>Add Service</span>
             </Link>
+            <Link
+              to="/dashboard/manageServices"
+              className={routes === 'manageServices' ? 'nav-link active' : ''}
+            >
+              <FaCog className="icon" />
+              <span>Manage Services</span>
+            </Link>
 
             <Link
               to="/dashboard/makeAdmin"
@@ -78,14 +86,6 @@ const Sidebar = () => {
             >
               <FaUserPlus className="icon" />
               <span>Make Admin</span>
-            </Link>
-
-            <Link
-              to="/dashboard/manageServices"
-              className={routes === 'manageServices' ? 'nav-link active' : ''}
-            >
-              <FaCog className="icon" />
-              <span>Manage Services</span>
             </Link>
           </>
         ) : (

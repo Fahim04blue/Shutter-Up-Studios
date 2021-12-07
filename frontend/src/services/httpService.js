@@ -5,6 +5,13 @@ const instance = axios.create({
   timeout: 15000,
 });
 
+instance.interceptors.request.use((config) => ({
+  ...config,
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('token')}`
+  }
+}));
+
 const responseBody = (response) => response.data.result;
 
 const requests = {

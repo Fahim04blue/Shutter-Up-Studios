@@ -21,6 +21,10 @@ class ProductService {
     return requests.get(`/services/${id}`);
   }
 
+  updateServiceById(id, body) {
+    return requests.patch(`/services/${id}`, body);
+  }
+
   deleteService(id) {
     return requests.delete(`/services/${id}`);
   }

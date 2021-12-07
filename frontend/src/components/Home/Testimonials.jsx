@@ -1,13 +1,15 @@
 import StyledDash from 'components/common/StyledDash';
+import useAsync from 'Hooks/useAsync';
+import { CardGroup } from 'react-bootstrap';
+import ReviewService from 'services/ReviewService';
+import SwiperCore, { Autoplay, Pagination } from 'swiper';
+import 'swiper/components/pagination/pagination.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
-import 'swiper/components/pagination/pagination.scss';
-import reviews from 'fakeData/reviews';
-import SwiperCore, { Autoplay, Pagination } from 'swiper';
-import { CardGroup } from 'react-bootstrap';
 import Testimonial from './Testimonial';
 
 const Testimonials = () => {
+  const { data: reviews } = useAsync(ReviewService.getReviews);
   SwiperCore.use([Pagination, Autoplay]);
   return (
     <div className="testimonials">
@@ -41,8 +43,8 @@ const Testimonials = () => {
             disableOnInteraction: false,
           }}
         >
-          {reviews.map((review) => (
-            <SwiperSlide key={review.id}>
+          {reviews?.map((review) => (
+            <SwiperSlide key={review._id}>
               <Testimonial review={review} />
             </SwiperSlide>
           ))}

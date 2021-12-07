@@ -12,6 +12,10 @@ const Services = () => {
   );
   const history = useHistory();
 
+  const handleBooking = (id) => {
+    history.push(`/booking/${id}`);
+  };
+
   return (
     <div className="services">
       <h1 className="top__heading">Services</h1>
@@ -45,7 +49,12 @@ const Services = () => {
                       >
                         View More
                       </Button>
-                      <Button className="card__btn">Book Now</Button>
+                      <Button
+                        onClick={() => handleBooking(service._id)}
+                        className="card__btn"
+                      >
+                        Book Now
+                      </Button>
                     </div>
                   </div>
                 </div>

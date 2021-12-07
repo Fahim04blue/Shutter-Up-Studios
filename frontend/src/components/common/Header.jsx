@@ -25,6 +25,7 @@ const Header = () => {
   }, []);
   const handleLogout = () => {
     logout();
+
     history.push('/');
   };
 
@@ -72,7 +73,7 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <NavLink className="nav__text" to="/account/login">
+                <NavLink className="nav__text" to="/login">
                   Login
                 </NavLink>
               )}

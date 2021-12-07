@@ -1,0 +1,104 @@
+.add__services {
+  form {
+    fieldset {
+      border: 0;
+      margin: 0 0 20px;
+      padding: 0;
+      label {
+        font-size: 0.875rem !important;
+        font-weight: normal !important;
+        margin-bottom: 0 !important;
+        line-height: 1em !important;
+        padding: 3px 5px !important;
+        margin-left: 8px !important;
+        position: relative !important;
+        z-index: 10 !important;
+        background-color: $white !important;
+      }
+      input {
+        display: block;
+        height: 36px;
+        font-size: 14px;
+        line-height: 20px;
+        width: 100%;
+        border-radius: 4px;
+        padding: 6px 12px;
+        font-weight: normal;
+        border: 1px solid rgb(184, 196, 194);
+        transition: border-color 150ms ease-in-out 0s;
+        outline: none;
+        color: rgb(33, 49, 60);
+        margin-top: -3px;
+        &:focus {
+          border: 1px solid $primary;
+          transition: border-color 150ms ease-in-out 0s;
+          outline: none;
+        }
+      }
+      textarea {
+        display: block;
+        height: 96px;
+        font-size: 14px;
+        line-height: 20px;
+        width: 100%;
+        border-radius: 4px;
+        padding: 6px 12px;
+        font-weight: normal;
+        border: 1px solid rgb(184, 196, 194);
+        transition: border-color 150ms ease-in-out 0s;
+        outline: none;
+        color: rgb(33, 49, 60);
+        margin-top: -3px;
+        &:focus {
+          border: 1px solid $primary;
+          transition: border-color 150ms ease-in-out 0s;
+          outline: none;
+        }
+      }
+      .error__message {
+        color: #e02121;
+        background-color: #ffb7b5;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: 20px;
+        letter-spacing: 0.02rem;
+        span {
+          margin-left: 3px;
+        }
+      }
+    }
+    .description__field {
+      border: 1px solid rgb(184, 196, 194);
+      padding: 0 20px 20px;
+      border-radius: 5px;
+      .link__label {
+        font-size: 14px;
+        padding: 0;
+        margin: 0 0 20px;
+        .link__label__title {
+          font-size: 16px;
+          padding: 0;
+          margin: 25px 0 5px;
+          font-weight: 600;
+          color: $black;
+        }
+      }
+    }
+    button {
+      display: block;
+      color: white;
+      background-color: $primary;
+      border: none;
+      border-radius: 2px;
+      box-shadow: 1px 3px 4px 0px black;
+      padding: 3px 10px;
+      &:disabled {
+        background-color: #f4f5f7;
+        color: #afb4bd;
+        box-shadow: none;
+        padding: 3px 10px;
+      }
+    }
+  }
+}

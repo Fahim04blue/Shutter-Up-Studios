@@ -34,6 +34,12 @@
     "comma-dangle": "off",
     "no-underscore-dangle": "off",
     "react/no-array-index-key": "off",
-    "indent": "warn"
+    "indent": "warn",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/jsx-indent": "warn",
+    "react/jsx-one-expression-per-line": "off",
+    "consistent-return": "warn",
+    "react/jsx-curly-newline": "warn",
+    "no-confusing-arrow": "warn"
   }
 }

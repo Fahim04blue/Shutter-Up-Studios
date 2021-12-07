@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap');
+.booking {
+  display: flex;
+  max-width: 100vw;
+  min-height: 100vh;
+  .booking__img {
+    width: 600px;
+    height: auto;
+    object-fit: cover;
+  }
+  .booking__sidebar {
+    width: calc(100vw - 600px);
+    height: auto;
+    .booking__component {
+      margin: 50px 0px 50px 42px;
+      .company__name {
+        font-family: 'Mr De Haviland', cursive;
+        font-weight: 600;
+        font-size: 4rem;
+      }
+      .booking__header {
+        margin-top: 15px;
+        margin-bottom: 24px;
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      .package__info {
+        border: 1px solid rgb(184, 196, 194);
+        width: 25vw;
+        padding: 0 20px 20px;
+        border-radius: 5px;
+        .package__label {
+          font-size: 14px;
+          padding: 0;
+          margin: 0 0 20px;
+          .package__label__title {
+            font-size: 1.6rem;
+            padding: 0;
+            margin: 25px 0 5px;
+            font-weight: 600;
+            color: $black;
+          }
+        }
+        .package__details {
+          font-size: 1.1rem;
+          span {
+            font-weight: 800;
+          }
+        }
+      }
+      .contact__box {
+        border: 1px solid rgb(184, 196, 194);
+        width: 25vw;
+        padding: 0 20px 20px;
+        border-radius: 5px;
+        margin: 24px 0;
+        .contact__form {
+          fieldset {
+            border: 0;
+            margin: 0 0 20px;
+            padding: 0;
+            label {
+              font-size: 0.875rem !important;
+              font-weight: normal !important;
+              margin-bottom: 0 !important;
+              line-height: 1em !important;
+              padding: 3px 5px !important;
+              margin-left: 8px !important;
+              position: relative !important;
+              z-index: 10 !important;
+              background-color: $light !important;
+            }
+            input {
+              display: block;
+              width: 100%;
+              height: 36px;
+              font-size: 14px;
+              line-height: 20px;
+              border-radius: 4px;
+              padding: 6px 12px;
+              font-weight: normal;
+              border: 1px solid rgb(184, 196, 194);
+              transition: border-color 150ms ease-in-out 0s;
+              outline: none;
+              color: rgb(33, 49, 60);
+              margin-top: -3px;
+              background-color: $light !important;
+              &:focus {
+                border: 1px solid $primary;
+                transition: border-color 150ms ease-in-out 0s;
+                outline: none;
+              }
+            }
+            textarea {
+              display: block;
+              height: 96px;
+              font-size: 14px;
+              line-height: 20px;
+              width: 100%;
+              border-radius: 4px;
+              padding: 6px 12px;
+              font-weight: normal;
+              border: 1px solid rgb(184, 196, 194);
+              transition: border-color 150ms ease-in-out 0s;
+              outline: none;
+              color: rgb(33, 49, 60);
+              margin-top: -3px;
+              &:focus {
+                border: 1px solid $primary;
+                transition: border-color 150ms ease-in-out 0s;
+                outline: none;
+              }
+            }
+            .error__message {
+              color: #e02121;
+              background-color: #ffb7b5;
+              padding: 10px;
+              font-size: 18px;
+              font-weight: bold;
+              line-height: 20px;
+              letter-spacing: 0.02rem;
+              span {
+                margin-left: 3px;
+              }
+            }
+          }
+          button {
+            display: block;
+            color: white;
+            background-color: $primary;
+            border: none;
+            border-radius: 2px;
+            box-shadow: 1px 3px 4px 0px black;
+            padding: 3px 10px;
+            &:disabled {
+              background-color: #f4f5f7;
+              color: #afb4bd;
+              box-shadow: none;
+              padding: 3px 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .booking {
+    flex-direction: column-reverse;
+  }
+  .booking__sidebar {
+    min-width: 100%;
+    min-height: calc(100vh - 70px) !important;
+    order: 1;
+    margin-left: -5px;
+  }
+  .booking__img {
+    width: 100vw !important;
+    height: 60px !important;
+    object-fit: cover !important;
+    order: 2 !important;
+  }
+  .booking__component {
+    margin: 50px 16px;
+    .booking__header {
+      font-size: 30px;
+    }
+    .package__info {
+      min-width: 80vw;
+    }
+    .contact__box {
+      min-width: 80vw;
+    }
+  }
+}

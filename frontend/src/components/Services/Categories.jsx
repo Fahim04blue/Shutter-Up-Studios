@@ -20,7 +20,7 @@ const Card = ({ sort }) => {
     [value, sort]
   );
   const { data: categoryData, isLoading } = useAsync(getCategoryData);
-  console.log(sort);
+  console.log(categoryData);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -43,7 +43,7 @@ const Card = ({ sort }) => {
           <div className="row g-5">
             {categoryData?.map((data) => (
               <div className="col-md-4">
-                <div className="card mb-5 mb-lg-0">
+                <div className="product-card mb-5 mb-lg-0">
                   <PricingTable key={data._id} services={data} />
                 </div>
               </div>

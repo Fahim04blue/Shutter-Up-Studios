@@ -67,7 +67,7 @@
         &::before {
           display: inline-block;
           border-top: 1px solid rgb(184, 196, 194);
-          content: "";
+          content: '';
           margin: 0px auto;
           position: absolute;
           height: 0px;
@@ -217,6 +217,9 @@
     }
     input {
       height: 52px !important;
+    }
+    .check__message {
+      top: -21px !important;
     }
   }
 }

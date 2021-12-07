@@ -1,9 +1,9 @@
-import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+import { useAuth } from 'contexts/AuthContext';
+import { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { AiFillWarning } from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
-import { useRef, useState } from 'react';
-import { useAuth } from 'contexts/AuthContext';
 import GoogleButton from './GoogleButton';
 
 const SignupForm = () => {
@@ -26,16 +26,16 @@ const SignupForm = () => {
 
   const onSubmit = async ({ email, password, name }, e) => {
     e.preventDefault();
-    console.log(email, password, name);
+    // console.log(email, password, name);
     try {
       setError('');
       await signup(email, password, name);
       history.push('/');
+      e.target.reset();
     } catch (error) {
       console.log(error.message);
-      setError('Failed to create an account!');
+      setError('Email already exists!');
     }
-    e.target.reset();
   };
 
   const handleGoogleLogin = async () => {
@@ -50,7 +50,7 @@ const SignupForm = () => {
   };
 
   return (
-    <nav className="signup__sidebar">
+    <div className="signup__sidebar">
       <div className="signup__component">
         <h2 className="d-inline-block">Dream Capture</h2>
         <h2 className="signup__header">Create your account</h2>
@@ -81,14 +81,15 @@ const SignupForm = () => {
                     name="name"
                     render={({ messages }) =>
                       // console.log("messages", messages);
-                      (messages
+                      messages
                         ? Object.entries(messages).map(([type, message]) => (
-                          <p className="error__message" key={type}>
-                            <AiFillWarning style={{ marginTop: '-5px' }} />
-                            <span>{message}</span>
-                          </p>
-                        ))
-                        : null)}
+                            <p className="error__message" key={type}>
+                              <AiFillWarning style={{ marginTop: '-5px' }} />
+                              <span>{message}</span>
+                            </p>
+                          ))
+                        : null
+                    }
                   />
                 </div>
               </div>
@@ -112,19 +113,27 @@ const SignupForm = () => {
                       },
                     })}
                   />
+                  {error && (
+                    <p className="error__message">
+                      <AiFillWarning style={{ marginTop: '-5px' }} />
+                      <span>{error}</span>
+                    </p>
+                  )}
+
                   <ErrorMessage
                     errors={errors}
                     name="email"
                     render={({ messages }) =>
                       // console.log("messages", messages);
-                      (messages
+                      messages
                         ? Object.entries(messages).map(([type, message]) => (
-                          <p className="error__message" key={type}>
-                            <AiFillWarning style={{ marginTop: '-5px' }} />
-                            <span>{message}</span>
-                          </p>
-                        ))
-                        : null)}
+                            <p className="error__message" key={type}>
+                              <AiFillWarning style={{ marginTop: '-5px' }} />
+                              <span>{message}</span>
+                            </p>
+                          ))
+                        : null
+                    }
                   />
                 </div>
               </div>
@@ -154,17 +163,15 @@ const SignupForm = () => {
                     name="password"
                     render={({ messages }) =>
                       // console.log("messages", messages);
-                      (messages
+                      messages
                         ? Object.entries(messages).map(([type, message]) => (
-                          <p className="error__message" key={type}>
-                            <AiFillWarning style={{ marginTop: '-5px' }} />
-                            <span>
-                              {' '}
-                              {message}
-                            </span>
-                          </p>
-                        ))
-                        : null)}
+                            <p className="error__message" key={type}>
+                              <AiFillWarning style={{ marginTop: '-5px' }} />
+                              <span> {message}</span>
+                            </p>
+                          ))
+                        : null
+                    }
                   />
                 </div>
               </div>
@@ -182,7 +189,8 @@ const SignupForm = () => {
                     placeholder="Confirm Password"
                     {...register('confirm_password', {
                       required: 'Password Confirmation is required',
-                      validate: (value) => value === password.current || 'Passwords do not match',
+                      validate: (value) =>
+                        value === password.current || 'Passwords do not match',
                     })}
                   />
                   <ErrorMessage
@@ -190,17 +198,15 @@ const SignupForm = () => {
                     name="confirm_password"
                     render={({ messages }) =>
                       // console.log("messages", messages);
-                      (messages
+                      messages
                         ? Object.entries(messages).map(([type, message]) => (
-                          <p className="error__message" key={type}>
-                            <AiFillWarning style={{ marginTop: '-5px' }} />
-                            <span>
-                              {' '}
-                              {message}
-                            </span>
-                          </p>
-                        ))
-                        : null)}
+                            <p className="error__message" key={type}>
+                              <AiFillWarning style={{ marginTop: '-5px' }} />
+                              <span> {message}</span>
+                            </p>
+                          ))
+                        : null
+                    }
                   />
                 </div>
               </div>
@@ -218,8 +224,7 @@ const SignupForm = () => {
                 })}
               />
               <span className="check__message">
-                I agree to the Terms &amp; Conditions
-                {' '}
+                I agree to the Terms &amp; Conditions{' '}
               </span>
               <ErrorMessage
                 errors={errors}
@@ -238,15 +243,12 @@ const SignupForm = () => {
               Sign up
             </button>
             <span>
-              Have an account?
-              {' '}
-              <Link to="/account/login">Login in now</Link>
-              {' '}
+              Have an account? <Link to="/login">Login in now</Link>{' '}
             </span>
           </footer>
         </form>
       </div>
-    </nav>
+    </div>
   );
 };
 
