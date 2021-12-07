@@ -13,8 +13,8 @@ const createService = async (req, res) => {
       name,
       summary,
       price,
-      // description: JSON.parse(description),
-      description,
+      description: JSON.parse(description),
+      // description,
       category,
       image: upload.secure_url,
       cloudinary_id: upload.public_id,
@@ -41,6 +41,7 @@ const createService = async (req, res) => {
 };
 
 const getService = async (req, res) => {
+  // console.log(req.headers.authorization);
   let query;
   const reqQuery = { ...req.query };
 
@@ -79,7 +80,10 @@ const getService = async (req, res) => {
 
 const getServiceById = async (req, res) => {
   try {
-    const serviceById = await Service.findById({ _id: req.params.id });
+    const serviceById = await Service.findById({ _id: req.params.id }).populate(
+      'category',
+      'name _id'
+    );
     res.status(200).json({
       message: 'Service by ID',
       result: serviceById,
@@ -103,9 +107,9 @@ const updateServiceById = async (req, res) => {
       name: req.body.name || service.name,
       summary: req.body.summary || service.summary,
       price: req.body.price || service.price,
-      // description:
-      //   JSON.parse(req.body.description) || JSON.parse(service.description),
-      description: req.body.description || service.description,
+      description:
+        JSON.parse(req.body.description) || JSON.parse(service.description),
+      // description: req.body.description || service.description,
       category: req.body.category || service.category,
       image: upload.secure_url || service.image,
       cloudinary_id: upload.public_id || service.cloudinary_id,
