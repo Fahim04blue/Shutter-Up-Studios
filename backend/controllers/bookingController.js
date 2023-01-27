@@ -52,13 +52,34 @@ const getBookings = async (req, res) => {
   } else {
     query = Booking.find();
   }
+
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 5;
+  const skip = (page - 1) * limit;
+  const total = await Booking.countDocuments();
+
+  const pages = Math.ceil(total / limit);
+
+  if (req.query.page) {
+    query = await query.skip(skip).limit(limit);
+  }
+
   try {
     const bookings = await query;
     res.status(200).json({
       message: req.query.email
         ? `Bookings of ${req.query.email}`
         : `All Bookings`,
-      result: bookings,
+      count: bookings.length,
+      page,
+      pages,
+      // result: {
+      //   data: bookings,
+      //   currentPage: page,
+      //   totalPages: pages,
+      //   count: bookings.length,
+      // },
+      data: bookings,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

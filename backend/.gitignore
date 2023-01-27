@@ -1,4 +1,4 @@
 node_modules/
 .env
 uploads/
-config/shutter-up-studio-serviceAccount.json
+#config/shutter-up-studio-serviceAccount.json

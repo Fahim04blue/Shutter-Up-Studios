@@ -8,7 +8,7 @@ const {
 const auth = require('../middlewares/auth');
 
 router.post('/', auth, createBooking);
-router.get('/', auth, getBookings);
+router.get('/', getBookings);
 router.get('/sessions/:id', auth, payment);
 router.patch('/:id', updateBookingStatus);
 
