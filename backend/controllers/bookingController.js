@@ -52,12 +52,11 @@ const getBookings = async (req, res) => {
   } else {
     query = Booking.find();
   }
-
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 5;
+  const limit = parseInt(req.query.limit) || 10;
   const skip = (page - 1) * limit;
-  const total = await Booking.countDocuments();
 
+  const total = await Booking.countDocuments(query);
   const pages = Math.ceil(total / limit);
 
   if (req.query.page) {
@@ -67,19 +66,17 @@ const getBookings = async (req, res) => {
   try {
     const bookings = await query;
     res.status(200).json({
-      message: req.query.email
+      result: {
+        data: bookings,
+        totalData: total,
+        currentPageData: bookings.length,
+        currentPage: page,
+        totalPages: pages,        
+        message: req.query.email
         ? `Bookings of ${req.query.email}`
-        : `All Bookings`,
-      count: bookings.length,
-      page,
-      pages,
-      // result: {
-      //   data: bookings,
-      //   currentPage: page,
-      //   totalPages: pages,
-      //   count: bookings.length,
-      // },
-      data: bookings,
+        : `All Bookings`
+      },
+ 
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
