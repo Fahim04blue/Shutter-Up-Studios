@@ -1,5 +1,5 @@
 import { useAuth } from 'contexts/AuthContext';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Avatar from 'react-avatar';
 import { Image } from 'react-bootstrap';
 import {
@@ -16,7 +16,7 @@ import UserService from 'services/UserService';
 
 const Sidebar = () => {
   const { currentUser, isAdmin, setIsAdmin } = useAuth();
-  const { routes } = useParams();
+  const { routes, pageNumber } = useParams();
 
   useEffect(() => {
     UserService.signIn(currentUser?.email).then((data) => {

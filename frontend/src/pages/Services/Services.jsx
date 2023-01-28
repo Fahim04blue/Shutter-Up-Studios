@@ -1,4 +1,5 @@
 import Categories from 'components/Services/Categories';
+import MetaData from 'components/common/MetaData';
 import { useState } from 'react';
 
 const Services = () => {
@@ -9,7 +10,11 @@ const Services = () => {
     // console.log(sort);
   };
   return (
-    <section style={{ paddingTop: '5%' }} className="pricing">
+    <section
+      style={{ paddingTop: '5%', paddingBottom: '5%' }}
+      className="pricing"
+    >
+      <MetaData title="Services" />
       <h1 className="top__heading">Our Packages</h1>
       <div className="container">
         <div className="text-end">

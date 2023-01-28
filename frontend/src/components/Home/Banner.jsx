@@ -1,7 +1,8 @@
-import { Carousel, Button } from 'react-bootstrap';
 import banner1 from 'asset/images/banner1.jpg';
 import banner2 from 'asset/images/banner2.jpg';
 import banner3 from 'asset/images/banner3.jpg';
+import { Button, Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Banner = () => (
   <Carousel fade controls={false} interval={2000}>
@@ -9,9 +10,7 @@ const Banner = () => (
       <img className="d-block w-100 " src={banner1} alt="First slide" />
       <Carousel.Caption>
         <h1>
-          Capturing
-          {' '}
-          <span className="top__caption">Memories</span>
+          Capturing <span className="top__caption">Memories</span>
         </h1>
         <div className="text-light">
           <p className="bottom__caption">
@@ -22,7 +21,9 @@ const Banner = () => (
             </span>
           </p>
         </div>
-        <Button className="carousel__btn">View Gallery</Button>
+        <Button className="carousel__btn">
+          <Link to="/services">View Services</Link>
+        </Button>
       </Carousel.Caption>
     </Carousel.Item>
     <Carousel.Item className="carousel__item">
@@ -30,9 +31,7 @@ const Banner = () => (
 
       <Carousel.Caption>
         <h1>
-          Capturing
-          {' '}
-          <span className="top__caption">Memories</span>
+          Capturing <span className="top__caption">Memories</span>
         </h1>
         <div className="text-light">
           <p className="bottom__caption">
@@ -43,7 +42,9 @@ const Banner = () => (
             </span>
           </p>
         </div>
-        <Button className="carousel__btn">View Gallery</Button>
+        <Button className="carousel__btn">
+          <Link to="/services">View Services</Link>
+        </Button>
       </Carousel.Caption>
     </Carousel.Item>
     <Carousel.Item className="carousel__item">
@@ -51,20 +52,21 @@ const Banner = () => (
 
       <Carousel.Caption>
         <h1>
-          Capturing
-          {' '}
-          <span className="top__caption">Memories</span>
+          Capturing <span className="top__caption">Memories</span>
         </h1>
         <div className="text-light">
           <p className="bottom__caption">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit.
             <span className="d-block">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Veniam, ducimus!
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam,
+              ducimus!
             </span>
           </p>
         </div>
-        <Button className="carousel__btn">View Gallery</Button>
+        <Button className="carousel__btn">
+          {' '}
+          <Link to="/services">View Services</Link>{' '}
+        </Button>
       </Carousel.Caption>
     </Carousel.Item>
   </Carousel>

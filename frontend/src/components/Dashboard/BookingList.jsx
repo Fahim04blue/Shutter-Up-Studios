@@ -1,21 +1,37 @@
 import { useAuth } from 'contexts/AuthContext';
-import useAsync from 'Hooks/useAsync';
-import { useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Card, Table } from 'react-bootstrap';
 import { FaArrowRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import BookingService from 'services/BookingService';
 import ServiceTableSkeleton from 'skeletons/ServiceTableSkeleton';
 import BookingListData from './BookingListData';
+import Pagination from './Pagination';
 
-const BookingList = () => {
+const BookingList = ({ match }) => {
+  const pageNumber = match.params.pageNumber || 1;
   const { currentUser } = useAuth();
-  const getBookingDataByEmail = useCallback(
-    () => BookingService.getBookings(currentUser.email),
-    [currentUser.email]
-  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(pageNumber);
+  const [pages, setPages] = useState(1);
 
-  const { data: bookingData, isLoading } = useAsync(getBookingDataByEmail);
+  const [bookingData, setBookingData] = useState(null);
+
+  useEffect(() => {
+    getBookingDataByEmail();
+  }, [page]);
+
+  const getBookingDataByEmail = async () => {
+    setIsLoading(true);
+    try {
+      const res = await BookingService.getBookings(currentUser.email, page);
+      setBookingData(res);
+      setPages(res?.totalPages);
+    } catch (error) {
+      console.error(error);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <Card>
@@ -44,13 +60,14 @@ const BookingList = () => {
             {isLoading && <ServiceTableSkeleton />}
             {!isLoading && (
               <>
-                {bookingData?.map((booking) => (
-                  <BookingListData booking={booking} />
+                {bookingData?.data.map((booking) => (
+                  <BookingListData key={booking._id} booking={booking} />
                 ))}
               </>
             )}
           </tbody>
         </Table>
+        <Pagination page={page} pages={pages} changePage={setPage} />
       </Card.Body>
     </Card>
   );

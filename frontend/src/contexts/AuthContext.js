@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
     const auth = getAuth();
     auth.currentUser?.getIdToken(true).then((token) => {
       setAuthToken(token);
-      console.log(authToken);
+      // console.log(authToken);
       localStorage.setItem('token', authToken);
     });
   });

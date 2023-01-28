@@ -19,6 +19,13 @@ const Review = () => {
     mode: 'onChange',
   });
   const onSubmit = (data, e) => {
+    const reviewDetails = {
+      name: data.name,
+      image: currentUser.photoURL
+        ? currentUser.photoURL
+        : process.env.REACT_APP_DUMMY_IMAGE_URL,
+      review: data.review,
+    };
     Swal.fire({
       title: 'Are you sure?',
       text: 'You can view your feedback on the Home page!',
@@ -30,7 +37,7 @@ const Review = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const loading = toast.loading('Deleting...Please wait!');
-        ReviewService.createReview(data)
+        ReviewService.createReview(reviewDetails)
           .then((data) => {
             toast.dismiss(loading);
             Swal.fire({

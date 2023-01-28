@@ -5,12 +5,12 @@ class BookingService {
     return requests.post('/booking', body);
   }
 
-  getBookings(email) {
-    return requests.get(`/booking?email=${email}`);
+  getBookings(email, page) {
+    return requests.get(`/booking?page=${page}&email=${email}`);
   }
 
-  getAllBookings() {
-    return requests.get('/booking');
+  getAllBookings(page) {
+    return requests.get(`/booking?page=${page}`);
   }
 
   getSessionPaymentStatus(id) {

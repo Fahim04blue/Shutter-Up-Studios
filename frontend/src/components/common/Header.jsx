@@ -1,11 +1,11 @@
 import { useAuth } from 'contexts/AuthContext';
-import React, { useEffect, useRef, useState } from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { useEffect, useRef, useState } from 'react';
+import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
 import { NavLink, useHistory, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const { currentUser, logout } = useAuth();
-  console.log(currentUser);
+  // console.log(currentUser);
   const [navBackground, setNavBackground] = useState(false);
   const history = useHistory();
   const navRef = useRef();
@@ -44,7 +44,7 @@ const Header = () => {
         }}
       >
         <Container>
-          <Navbar.Brand to="/"> Dream Capture</Navbar.Brand>
+          <Navbar.Brand to="/">ShutterUp Studios</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto gap-4 navbar__light  ">
@@ -53,9 +53,6 @@ const Header = () => {
               </NavLink>
               <NavLink className="nav__text" to="/services">
                 Services
-              </NavLink>
-              <NavLink className="nav__text" to="/gallery">
-                Gallery
               </NavLink>
               {currentUser ? (
                 <NavDropdown

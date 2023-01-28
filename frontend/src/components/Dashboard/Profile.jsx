@@ -1,10 +1,10 @@
 import { useAuth } from 'contexts/AuthContext';
-import React from 'react';
 import Avatar from 'react-avatar';
 import { Col, Form, Image, Row } from 'react-bootstrap';
 
 const Profile = () => {
   const { currentUser } = useAuth();
+  // console.log(currentUser);
   return (
     <>
       <Row>

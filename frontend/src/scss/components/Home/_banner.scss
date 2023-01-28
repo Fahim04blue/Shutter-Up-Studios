@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap');
 
 .carousel__item {
   height: 100vh;
@@ -18,7 +18,7 @@
   left: 15%;
   text-align: start;
   h1 {
-    font-family: "Mr De Haviland", cursive;
+    font-family: 'Mr De Haviland', cursive;
     font-size: 5rem;
   }
   .top__caption {
@@ -29,6 +29,9 @@
   .carousel__btn {
     border-radius: 20px;
     box-shadow: 1px 3px 4px 0px black;
+    a {
+      color: aliceblue;
+    }
   }
 }
 

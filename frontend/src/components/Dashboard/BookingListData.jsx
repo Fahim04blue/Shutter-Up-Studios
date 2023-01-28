@@ -1,5 +1,5 @@
 import useAsync from 'Hooks/useAsync';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import BookingService from 'services/BookingService';
 import { prettyPrintNumbers } from 'utils/utils';
 

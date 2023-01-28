@@ -1,15 +1,34 @@
-import useAsync from 'Hooks/useAsync';
+import { useEffect, useState } from 'react';
 import { Button, Card, Table } from 'react-bootstrap';
 import { FaArrowRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import BookingService from 'services/BookingService';
 import ServiceTableSkeleton from 'skeletons/ServiceTableSkeleton';
 import AllBookingsData from './AllBookingsData';
+import Pagination from './Pagination';
 
-const AllBookings = () => {
-  const { data: bookingData, isLoading } = useAsync(
-    BookingService.getAllBookings
-  );
+const AllBookings = ({ match }) => {
+  const pageNumber = match.params.pageNumber || 1;
+  const [bookingData, setBookingData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(pageNumber);
+  const [pages, setPages] = useState(1);
+
+  useEffect(() => {
+    getBookingData();
+  }, [page]);
+
+  const getBookingData = async () => {
+    setLoading(true);
+    try {
+      const res = await BookingService.getAllBookings(page);
+      setBookingData(res?.data);
+      setPages(res?.totalPages);
+    } catch (error) {
+      console.error(error);
+    }
+    setLoading(false);
+  };
 
   return (
     <Card>
@@ -39,16 +58,17 @@ const AllBookings = () => {
             </tr>
           </thead>
           <tbody>
-            {isLoading && <ServiceTableSkeleton />}
-            {!isLoading && (
+            {loading && <ServiceTableSkeleton />}
+            {!loading && (
               <>
                 {bookingData?.map((booking) => (
-                  <AllBookingsData booking={booking} />
+                  <AllBookingsData key={booking._id} booking={booking} />
                 ))}
               </>
             )}
           </tbody>
         </Table>
+        <Pagination page={page} pages={pages} changePage={setPage} />
       </Card.Body>
     </Card>
   );

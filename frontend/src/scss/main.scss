@@ -3,12 +3,14 @@
 @import './global/reset';
 @import './global/global';
 @import './components/common/header';
+@import './components/common/_footer';
 @import './components/Home/banner';
 @import './components/Home/services';
 @import './components/Home/testimonial';
 @import './components/Dashboard/dashboard';
 @import './components/Dashboard/addservice';
 @import './components/Dashboard/manageservice';
+@import './components/Dashboard/pagination';
 @import './components/Bookings/booking';
 @import './components/auth/login';
 @import './components/auth/signup';

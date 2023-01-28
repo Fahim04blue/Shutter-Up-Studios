@@ -35,11 +35,11 @@ const AllBookingsData = ({ booking }) => {
       <td>{booking.packageInfo.name}</td>
       <td>{booking.packageInfo.category}</td>
       <td>Tk. {prettyPrintNumbers(booking.packageInfo.price)}</td>
-      <td>{paymentStatus?.payment_status}</td>
       <td>{name}</td>
       <td>{email}</td>
       <td>{phone}</td>
       <td>{address}</td>
+      <td>{paymentStatus?.payment_status}</td>
       <td>
         {eventDate.replace(/:/gm, '.').replace('T', '-').replace('Z', '')}
       </td>

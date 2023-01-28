@@ -1,10 +1,10 @@
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import Box from '@mui/material/Box';
-import { ThemeProvider } from '@mui/material/styles';
 import Tab from '@mui/material/Tab';
+import { ThemeProvider } from '@mui/material/styles';
 import useAsync from 'Hooks/useAsync';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import CategoryService from 'services/CategoryService';
 import ProductService from 'services/ProductService';
 import CategoryNameSkeleton from 'skeletons/CategoryNameSkeleton';
@@ -20,7 +20,7 @@ const Card = ({ sort }) => {
     [value, sort]
   );
   const { data: categoryData, isLoading } = useAsync(getCategoryData);
-  console.log(categoryData);
+  // console.log(categoryData);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };

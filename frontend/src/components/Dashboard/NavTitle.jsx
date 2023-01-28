@@ -47,6 +47,12 @@ const NavTitle = () => {
                 path="/dashboard/allBookings"
                 component={AllBookings}
               />
+            ) : routes === 'allBookings' ? (
+              <AdminRoute
+                exact
+                path="/dashboard/allBookings/page/:pageNumber"
+                component={AllBookings}
+              />
             ) : routes === 'addService' ? (
               <AdminRoute
                 exact
