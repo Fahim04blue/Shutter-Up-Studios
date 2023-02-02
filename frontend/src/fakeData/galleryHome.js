@@ -1,15 +1,15 @@
-import gh1 from 'asset/images/gh1.jpg';
-import gh2 from 'asset/images/gh2.jpg';
-import gh3 from 'asset/images/gh3.jpg';
-import gh4 from 'asset/images/gh4.jpg';
-import gh5 from 'asset/images/gh5.jpg';
-import gh6 from 'asset/images/gh6.jpg';
-import gh7 from 'asset/images/gh7.jpg';
-import gh8 from 'asset/images/gh8.jpg';
-import gh9 from 'asset/images/gh9.jpg';
-import gh10 from 'asset/images/gh10.jpg';
-import gh11 from 'asset/images/gh11.jpg';
-import gh12 from 'asset/images/gh12.jpg';
+import gh1 from 'asset/images/jeremy-wong-weddings-K8KiCHh4WU4-unsplash.jpg';
+import gh4 from 'asset/images/junior-reis-xMDo8y776uE-unsplash.jpg';
+import gh5 from 'asset/images/karl-magnuson-85J99sGggnw-unsplash.jpg';
+import gh6 from 'asset/images/ksav-pun-EHAn0csi6-E-unsplash.jpg';
+import gh7 from 'asset/images/nathan-dumlao-H_cZqryUuok-unsplash.jpg';
+import gh8 from 'asset/images/nathan-dumlao-rGHO4XSF0Qk-unsplash.jpg';
+import gh9 from 'asset/images/nikita-shirokov-qGgjalogCdE-unsplash.jpg';
+import gh10 from 'asset/images/redd-f-y4bE8ST_CTg-unsplash.jpg';
+import gh2 from 'asset/images/tom-the-photographer-8yPA6ZYq0-s-unsplash.jpg';
+import gh3 from 'asset/images/vadim-paripa-PuXtB1B4zL8-unsplash.jpg';
+import gh11 from 'asset/images/vadim-paripa-tEFItLGn0uc-unsplash.jpg';
+import gh12 from 'asset/images/victoria-priessnitz-MMNgGsFEbuI-unsplash.jpg';
 
 const galleryHome = [
   {
